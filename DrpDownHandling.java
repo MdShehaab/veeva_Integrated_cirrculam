@@ -7,30 +7,28 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.Select;
 
-public class HandlingCheckBoxes2 {
+public class DrpDownHandling {
 
 	public static void main(String[] args) {
+		// TODO Auto-generated method stub
 		WebDriver driver = new ChromeDriver();
 		driver.manage().window().maximize();
 		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
 		driver.get("https://testautomationpractice.blogspot.com/");
-		List<WebElement> checkBoxes = driver.findElements(By.xpath("//tbody/tr/td[4]/input[1]"));
-//		for(WebElement checkbox : checkBoxes) {
-//			checkbox.click();
-//		}
-		for(int i = 4 ; i < checkBoxes.size() ; i++) {
-			checkBoxes.get(i).click();
+		//select dropdown
+		WebElement dpc = driver.findElement(By.xpath("//select[@id='country']"));
+		dpc.click();
+		Select drp = new Select(dpc);
+//		drp.selectByVisibleText("Canada");
+//		drp.selectByValue("uk");
+		List<WebElement> options = drp.getOptions();
+		System.out.println(options.size());
+		for(WebElement op : options) {
+			System.out.println(op.getText());
 		}
-		//unselect checkboxes if they are selected
-//		for(int i = 0 ; i < checkBoxes.size() ; i++) {
-//			if(checkBoxes.get(i).isSelected()) {
-//				checkBoxes.get(i).click();
-//			}
-//		}
-		
-		//driver.close();
-
+		driver.close();
 	}
 
 }
